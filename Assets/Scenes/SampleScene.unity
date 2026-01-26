@@ -2434,7 +2434,7 @@ Animator:
   m_GameObject: {fileID: 919132149209492349}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: c778353f414703b479c5ad985aaf32c5, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b4a5b338c59b0f54ca8e643928ea3a37, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -2493,6 +2493,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  animator: {fileID: 5866666021855194045}
 --- !u!65 &5866666021855194048
 BoxCollider:
   m_ObjectHideFlags: 0
