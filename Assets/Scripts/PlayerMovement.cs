@@ -2,9 +2,10 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [Header("Movement Settings")]
-    public float moveSpeed = 8f;
-    public float jumpForce = 10f;
+    [Header("Speeds")]
+    public float walkSpeed = 5f;
+    public float runSpeed = 10f;
+    public float jumpForce = 8f;
     public float rotateSpeed = 10f;
 
     [Header("Ground Check")]
@@ -13,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundLayer;
 
     [Header("Animation")]
-    public Animator animator; // Drag the Animator component here
+    public Animator animator;
 
     private Rigidbody rb;
     private Vector3 moveDirection;
@@ -22,8 +23,6 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-
-        // If you forgot to drag it in, we try to find it automatically
         if (animator == null) animator = GetComponent<Animator>();
     }
 
@@ -32,42 +31,40 @@ public class PlayerMovement : MonoBehaviour
         // 1. INPUT
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
-
         moveDirection = new Vector3(x, 0, z).normalized;
 
-        // 2. ANIMATION LOGIC (The new part!)
-        // If the direction magnitude is > 0, it means we are moving
+        // Check Input Status
         bool isMoving = moveDirection.magnitude > 0.01f;
+        bool isSprinting = Input.GetKey(KeyCode.LeftShift);
 
+        // 2. EXCLUSIVE ANIMATION LOGIC (The Fix)
         if (animator != null)
         {
-            animator.SetBool("IsWalking", isMoving);
+            // Walk is ONLY true if moving AND NOT sprinting
+            animator.SetBool("IsWalking", isMoving && !isSprinting);
+
+            // Run is ONLY true if moving AND sprinting
+            animator.SetBool("IsRunning", isMoving && isSprinting);
         }
 
         // 3. JUMP
         if (feetPoint != null)
-        {
             isGrounded = Physics.CheckSphere(feetPoint.position, groundRadius, groundLayer);
-        }
 
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
-            // Optional: If you have a Jump animation, trigger it here
-            // animator.SetTrigger("Jump"); 
+            if (animator != null) animator.SetTrigger("trigJump");
         }
 
-        // 4. ROTATION
+        // 4. PHYSICS & ROTATION
         if (moveDirection != Vector3.zero)
         {
             Quaternion toRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
             transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, rotateSpeed * Time.deltaTime);
         }
-    }
 
-    void FixedUpdate()
-    {
-        // 5. PHYSICS MOVEMENT
-        rb.velocity = new Vector3(moveDirection.x * moveSpeed, rb.velocity.y, moveDirection.z * moveSpeed);
+        float currentSpeed = isSprinting ? runSpeed : walkSpeed;
+        rb.velocity = new Vector3(moveDirection.x * currentSpeed, rb.velocity.y, moveDirection.z * currentSpeed);
     }
 }

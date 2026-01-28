@@ -1,35 +1,26 @@
 using UnityEngine;
-using System.Collections; // Needed for Coroutines (Timing)
+using System.Collections;
 
 public class PickupSystem : MonoBehaviour
 {
     [Header("Settings")]
-    public Transform holdPoint;
     public float pickUpRange = 2f;
     public LayerMask itemLayer;
-    public Animator playerAnimator; // Drag your Animator here
+    public Animator playerAnimator;
 
-    [Header("Timing")]
-    public float pickupDelay = 0.6f; // How long to wait before object sticks to hand
+    [Header("Inventory")]
+    public bool hasKey = false; // This stores if we have the key!
 
-    private GameObject heldObject;
-    private bool isPickingUp = false; // Prevents spamming E
+    private bool isPickingUp = false;
 
     void Update()
     {
-        // Prevent moving or interacting while animation is playing
         if (isPickingUp) return;
 
+        // Press E to interact
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (heldObject == null)
-            {
-                TryPickup();
-            }
-            else
-            {
-                DropObject();
-            }
+            TryPickup();
         }
     }
 
@@ -39,50 +30,33 @@ public class PickupSystem : MonoBehaviour
 
         foreach (var hit in hitColliders)
         {
-            // Found an item! Start the animation sequence
-            StartCoroutine(PickupSequence(hit.gameObject));
-            return;
+            // Check if it is the Key
+            if (hit.gameObject.name.Contains("Key") || hit.gameObject.tag == "Key")
+            {
+                StartCoroutine(PickupSequence(hit.gameObject));
+                return;
+            }
         }
     }
 
-    // This is a "Coroutine" - it allows us to pause code execution
     IEnumerator PickupSequence(GameObject item)
     {
-        isPickingUp = true; // Lock input
+        isPickingUp = true;
 
         // 1. Play Animation
         if (playerAnimator != null) playerAnimator.SetTrigger("trigPickup");
 
-        // 2. Wait for the hand to reach the ground
-        // (Adjust "pickupDelay" in Inspector to match your animation speed)
-        yield return new WaitForSeconds(pickupDelay);
-
-        // 3. Attach object (The Logic)
-        heldObject = item;
-
-        Rigidbody rb = heldObject.GetComponent<Rigidbody>();
-        if (rb != null) rb.isKinematic = true;
-
-        heldObject.GetComponent<Collider>().enabled = false;
-        heldObject.transform.SetParent(holdPoint);
-        heldObject.transform.localPosition = Vector3.zero;
-        heldObject.transform.localRotation = Quaternion.identity;
-
-        // 4. Wait for animation to finish standing up before moving again
+        // 2. Wait for hand to go down (adjust this time to match your animation)
         yield return new WaitForSeconds(0.5f);
 
-        isPickingUp = false; // Unlock input
-    }
+        // 3. "Store" the item
+        hasKey = true;          // Remember we have it
+        Destroy(item);          // Delete the object from the world (Hides it)
+        Debug.Log("Key Picked Up! Go find the wall.");
 
-    void DropObject()
-    {
-        heldObject.transform.SetParent(null);
-
-        Rigidbody rb = heldObject.GetComponent<Rigidbody>();
-        if (rb != null) rb.isKinematic = false;
-
-        heldObject.GetComponent<Collider>().enabled = true;
-        heldObject = null;
+        // 4. Wait for animation to finish
+        yield return new WaitForSeconds(0.5f);
+        isPickingUp = false;
     }
 
     void OnDrawGizmosSelected()
