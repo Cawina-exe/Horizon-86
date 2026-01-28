@@ -2,49 +2,58 @@ using UnityEngine;
 
 public class DoorController : MonoBehaviour
 {
+    [Header("Setup")]
+    public Transform player;        // Drag your Player object here!
+    public PickupSystem playerInventory; // Drag your Player object here too!
+
     [Header("Settings")]
+    public float openRange = 4.0f;  // How close you need to be
+    public float slideAmount = 5f;
     public float openSpeed = 2f;
-    public float slideAmount = 5f; // How many meters down (or up) it moves
-    public bool moveDown = true;   // Check true to go down (into ground), false to go up
 
     private bool isOpening = false;
-    private Vector3 targetPosition;
+    private Vector3 targetPos;
 
     void Start()
     {
-        // Calculate where the door should end up
-        float direction = moveDown ? -1f : 1f;
-        targetPosition = transform.position + new Vector3(0, slideAmount * direction, 0);
+        // Calculate where the door goes (Down into the ground)
+        targetPos = transform.position + Vector3.down * slideAmount;
+
+        // Auto-find scripts if you forgot to drag them in
+        if (player == null) player = GameObject.FindGameObjectWithTag("Player").transform;
+        if (playerInventory == null) playerInventory = player.GetComponent<PickupSystem>();
     }
 
     void Update()
     {
-        // If the door is unlocked, slide it smoothly
-        if (isOpening)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, openSpeed * Time.deltaTime);
-        }
-    }
+        // 1. Check Distance
+        float dist = Vector3.Distance(transform.position, player.position);
 
-    // This detects when the player touches the wall
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
+        // 2. Logic: If close + Press E + Has Key + Not already open
+        if (dist < openRange && Input.GetKeyDown(KeyCode.E) && !isOpening)
         {
-            // Check if the player has the key
-            PickupSystem playerInventory = other.GetComponent<PickupSystem>();
-
-            if (playerInventory != null && playerInventory.hasKey == true)
+            if (playerInventory.hasKey)
             {
-                Debug.Log("Key used! Opening Wall.");
+                Debug.Log("Key Used! Opening Wall.");
                 isOpening = true;
-                // Optional: Destroy the wall entirely if you prefer disintegration
-                // Destroy(gameObject, 2f); 
             }
             else
             {
                 Debug.Log("Locked! You need the Key.");
             }
         }
+
+        // 3. Move the Wall
+        if (isOpening)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, openSpeed * Time.deltaTime);
+        }
+    }
+
+    // Draw a red circle in the Scene view to show the range
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, openRange);
     }
 }
