@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - Key
+  - Rock
   layers:
   - Default
   - TransparentFX
