@@ -3,13 +3,13 @@
 ![Platform](https://img.shields.io/badge/Platform-PC-blue)
 ![Status](https://img.shields.io/badge/Status-InDevelopment-orange)
 
-# 🌅 Horizon-86
+# Horizon-86
 
 **Horizon-86** is a narrative-driven 3D exploration and puzzle game prototype that takes the player on a journey through Portugal's historical and technological development. Through interaction and problem-solving mechanics, the game explores the country's transition from joining the EEC in 1986 to modernity.
 
 Developed as part of the **Video Games program at ETIC Algarve (24/26)**.
 
-## 📖 Game Overview
+## Game Overview
 
 In **Horizon-86**, players control a young explorer in a retro-futuristic setting where time and progress are fragmented. The goal is to overcome physical and temporal barriers to reconnect the country.
 
@@ -21,20 +21,20 @@ Each phase of the game represents a decade or a major milestone:
 * **2026:** The present and the future(Ongoing).
 
 
-## ✨ Key Features
+## Key Features
 
-### 🏃 Multi-State Movement
+###  Multi-State Movement
 * Advanced locomotion system with walking, sprinting, and jumping.
 * Fluid animation transitions managed via an Animator Controller.
 
-### 🧩 Interaction & Puzzle Solving
+### Interaction & Puzzle Solving
 * Inventory system for collecting essential items such as keys and construction rocks.
 * Environmental interaction mechanics (pressing 'E' to activate mechanisms and build structures).
 
-### 🏗️ World Evolution
+### World Evolution
 * Real-time environment changes, including sliding barriers and bridges that reconstruct upon delivering resources.
 
-## 🧑‍🚀 Character
+## Character
 
 **Horizon Explorer**
 * A visionary young woman with a cyberpunk aesthetic.
@@ -51,7 +51,7 @@ Each phase of the game represents a decade or a major milestone:
 | 4 | 2016 | Under Development | Digital Inovation and stabilization |
 | 5 | 2026 | Under Development |The present and the future |
 
-## 🎮 Controls
+## Controls
 
 ### Keyboard & Mouse
 | Action | Key |
@@ -62,22 +62,22 @@ Each phase of the game represents a decade or a major milestone:
 | **Interact (Collect/Build)** | E |
 | **Pause Menu** | ESC |
 
-## 🧠 Core Mechanics
+## Core Mechanics
 * **Trigger-Based Actions:** Global event activation through proximity and specific inputs.
 * **Physics Interaction:** Use of Rigidbodies and Colliders for realistic movement and collisions.
 * **State Management:** Animator Controller managing multiple Mixamo animation layers.
 
-## 🎨 Visual Style
+## Visual Style
 * **Voxel / Low-Poly** aesthetic.
 * Retro-futuristic environment inspired by Portuguese architecture.
 * Stylized character with fluid root-motion animations.
 
-## 🛠️ Technologies Used
+## Technologies Used
 * **Unity 6 (6000.2.8f1)**
 * **C# Scripting**
 * **Voxel Art Tools**
 
-## 📂 Project Structure
+## Project Structure
 ```text
 Horizon86/
 │
