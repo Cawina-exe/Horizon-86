@@ -1,4 +1,4 @@
-# 🌅 Horizon-86
+# 🇵🇹  🇪🇺 Horizon-86
 
 **Horizon-86** is a narrative-driven 3D exploration and puzzle game prototype that takes the player on a journey through Portugal's historical and technological development. Through interaction and problem-solving mechanics, the game explores the country's transition from joining the EEC in 1986 to modernity.
 
