@@ -70,7 +70,6 @@ Each phase of the game represents a decade or a major milestone:
 ## 🛠️ Technologies Used
 * **Unity 6 (6000.2.8f1)**
 * **C# Scripting**
-* **Mixamo** (Animation Library)
 * **Voxel Art Tools**
 
 ## 📂 Project Structure
