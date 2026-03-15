@@ -1,3 +1,8 @@
+![Unity](https://img.shields.io/badge/Engine-Unity-black?logo=unity)
+![C#](https://img.shields.io/badge/Language-C%23-purple)
+![Platform](https://img.shields.io/badge/Platform-PC-blue)
+![Status](https://img.shields.io/badge/Status-InDevelopment-orange)
+
 # 🌅 Horizon-86
 
 **Horizon-86** is a narrative-driven 3D exploration and puzzle game prototype that takes the player on a journey through Portugal's historical and technological development. Through interaction and problem-solving mechanics, the game explores the country's transition from joining the EEC in 1986 to modernity.
