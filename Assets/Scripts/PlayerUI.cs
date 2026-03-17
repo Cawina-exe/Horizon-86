@@ -68,6 +68,12 @@ public class PlayerUI : MonoBehaviour
                 targetFound = true;
                 break;
             }
+            else if (hit.CompareTag("Door"))
+            {
+                interactText.text = "Press [E] to Open Door";
+                targetFound = true;
+                break;
+            }
         }
 
    
