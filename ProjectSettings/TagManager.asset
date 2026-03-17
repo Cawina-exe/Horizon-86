@@ -8,6 +8,8 @@ TagManager:
   - Rock
   - Wall
   - Bridge
+  - NPC
+  - Phone
   layers:
   - Default
   - TransparentFX

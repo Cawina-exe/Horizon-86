@@ -56,6 +56,18 @@ public class PlayerUI : MonoBehaviour
                 targetFound = true;
                 break;
             }
+            else if (hit.CompareTag("NPC"))
+            {
+                interactText.text = "Press [E] to Talk";
+                targetFound = true;
+                break;
+            }
+            else if (hit.CompareTag("Phone"))
+            {
+                interactText.text = "Press [E] to Listen";
+                targetFound = true;
+                break;
+            }
         }
 
    
