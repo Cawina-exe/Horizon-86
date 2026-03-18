@@ -1169,6 +1169,8 @@ MonoBehaviour:
   currentRocks: 0
   interactRange: 5
   player: {fileID: 543450653686870471}
+  fallDistance: 5
+  fallSpeed: 2
 --- !u!1 &28521917
 GameObject:
   m_ObjectHideFlags: 0
@@ -14778,6 +14780,59 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 504493143}
   m_Mesh: {fileID: -2432090755550338912, guid: c71f3b035682b6441af226fd99090011, type: 3}
+--- !u!1 &506884333
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 506884335}
+  - component: {fileID: 506884334}
+  m_Layer: 0
+  m_Name: river limits (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &506884334
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 506884333}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &506884335
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 506884333}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 169.53, y: -0.67, z: -5.49}
+  m_LocalScale: {x: 1, y: 1.27, z: 20}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &509851136
 GameObject:
   m_ObjectHideFlags: 0
@@ -17728,8 +17783,8 @@ Transform:
   m_GameObject: {fileID: 624236904}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 71.76, y: -1.3540001, z: -38.06}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 71.76, y: -1.3540001, z: -37.925}
+  m_LocalScale: {x: 1, y: 1, z: 1.0268}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1302214360}
@@ -38489,6 +38544,59 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1409358902}
   m_Mesh: {fileID: -2432090755550338912, guid: 13da406c2b1e2a6468ce8a1f6cb5893b, type: 3}
+--- !u!1 &1416746733
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1416746735}
+  - component: {fileID: 1416746734}
+  m_Layer: 0
+  m_Name: river limits
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &1416746734
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1416746733}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1416746735
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1416746733}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 159.14, y: -0.67, z: -12.97}
+  m_LocalScale: {x: 1, y: 1.27, z: 16.7}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1420532273
 GameObject:
   m_ObjectHideFlags: 0
@@ -41840,8 +41948,8 @@ Transform:
   m_GameObject: {fileID: 1520058592}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 81.65, y: -1.3540001, z: -38.1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 81.65, y: -1.3540001, z: -37.9661}
+  m_LocalScale: {x: 1, y: 1, z: 1.0268}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1302214360}
@@ -73475,6 +73583,7 @@ GameObject:
   - component: {fileID: 3070104651751472183}
   - component: {fileID: 6303985449967212737}
   - component: {fileID: 9057886847617459590}
+  - component: {fileID: 9057886847617459591}
   m_Layer: 6
   m_Name: bridge_rock_01.001
   m_TagString: Untagged
@@ -77101,7 +77210,7 @@ Transform:
   m_GameObject: {fileID: 7604444232245582710}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.06387715, z: -0, w: 0.99795777}
-  m_LocalPosition: {x: 78.3053, y: -1.19, z: -27.514921}
+  m_LocalPosition: {x: 78.3053, y: -1.26, z: -28.14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -83540,6 +83649,20 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 6778282298208291053, guid: adf81115af100254389734482bab2b62, type: 3}
+--- !u!114 &9057886847617459591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3926237101933797362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae1502246c8872c4f97a0371a7f4971a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RiseUpObject
+  riseDistance: 5
+  riseSpeed: 2
 --- !u!4 &9076501215116242814
 Transform:
   m_ObjectHideFlags: 0
@@ -83771,3 +83894,5 @@ SceneRoots:
   - {fileID: 3577660241030533098}
   - {fileID: 1092320015}
   - {fileID: 292466775}
+  - {fileID: 1416746735}
+  - {fileID: 506884335}
