@@ -52,7 +52,22 @@ public class PlayerUI : MonoBehaviour
             }
             else if (hit.CompareTag("Bridge"))
             {
-                interactText.text = "Press [E] to rebuild Bridge";
+                
+                BridgeManager bridge = hit.GetComponent<BridgeManager>();
+
+                if (bridge != null)
+                {
+                  
+                    if (bridge.currentRocks >= bridge.rocksNeeded)
+                    {
+                        interactText.text = "Press [E] to build the bridge";
+                    }
+                    else
+                    {
+                        interactText.text = "Find the 3 rocks to build the bridge";
+                    }
+                }
+
                 targetFound = true;
                 break;
             }

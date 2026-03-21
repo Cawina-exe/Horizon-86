@@ -3,25 +3,29 @@ using UnityEngine;
 public class DoorController : MonoBehaviour
 {
     [Header("Setup")]
-    public Transform player;        // Drag your Player object here!
-    public PickupSystem playerInventory; // Drag your Player object here too!
+    public Transform player;
+    public PickupSystem playerInventory;
 
     [Header("Settings")]
-    public float openRange = 4.0f;  // How close you need to be
+    public float openRange = 4.0f;
     public float slideAmount = 5f;
     public float openSpeed = 2f;
+
+    [Header("Audio")]
+    public AudioSource openSound; // <-- NEW: The audio slot!
 
     private bool isOpening = false;
     private Vector3 targetPos;
 
     void Start()
     {
-        // Calculate where the door goes (Down into the ground)
         targetPos = transform.position + Vector3.down * slideAmount;
 
-        // Auto-find scripts if you forgot to drag them in
         if (player == null) player = GameObject.FindGameObjectWithTag("Player").transform;
         if (playerInventory == null) playerInventory = player.GetComponent<PickupSystem>();
+
+        // Auto-find the Audio Source if you forget to drag it in
+        if (openSound == null) openSound = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -36,6 +40,16 @@ public class DoorController : MonoBehaviour
             {
                 Debug.Log("Key Used! Opening Wall.");
                 isOpening = true;
+
+                // --- NEW: Play the heavy stone sound! ---
+                if (openSound != null)
+                {
+                    openSound.Play();
+                }
+
+                // --- NEW: Turn off the collider so you can walk through! ---
+                Collider wallCollider = GetComponent<Collider>();
+                if (wallCollider != null) wallCollider.enabled = false;
             }
             else
             {
@@ -50,7 +64,6 @@ public class DoorController : MonoBehaviour
         }
     }
 
-    // Draw a red circle in the Scene view to show the range
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
