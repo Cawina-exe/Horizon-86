@@ -1,16 +1,20 @@
+using System.Collections;
 using UnityEngine;
 
 public class NegotiatorNPC : MonoBehaviour
 {
     [Header("Setup")]
-    public FundManager manager; // Drag your FundManager empty object here!
+    public FundManager manager;
     private Transform player;
 
     [Header("Settings")]
     public float interactRange = 3f;
-    public bool hasSpoken = false; // Keeps track so you can't talk to the same guy 4 times
 
-    [Header("Audio (Optional)")]
+    // We split this into two states now!
+    public bool isNegotiating = false;
+    public bool negotiationComplete = false;
+
+    [Header("Audio")]
     public AudioSource talkSound;
 
     void Start()
@@ -21,8 +25,8 @@ public class NegotiatorNPC : MonoBehaviour
 
     void Update()
     {
-        // If we already secured his vote/funds, stop checking for input
-        if (hasSpoken) return;
+        // If we are currently talking, or already finished, do nothing.
+        if (isNegotiating || negotiationComplete) return;
 
         if (player != null)
         {
@@ -30,15 +34,31 @@ public class NegotiatorNPC : MonoBehaviour
 
             if (dist < interactRange && Input.GetKeyDown(KeyCode.E))
             {
-                Debug.Log("Negotiation successful!");
-                hasSpoken = true;
-
-                // Play their voice line if they have one
-                if (talkSound != null) talkSound.Play();
-
-                // Tell the Manager to add +1 to the score!
-                if (manager != null) manager.AddNegotiation();
+                StartCoroutine(NegotiationRoutine());
             }
         }
+    }
+
+    IEnumerator NegotiationRoutine()
+    {
+        isNegotiating = true; // Lock the interaction
+
+        if (talkSound != null && talkSound.clip != null)
+        {
+            talkSound.Play();
+            // Wait for the exact length of the audio file!
+            yield return new WaitForSeconds(talkSound.clip.length);
+        }
+        else
+        {
+            // Fallback just in case you forget the audio
+            yield return new WaitForSeconds(2f);
+        }
+
+        // The audio is done! Now we complete it.
+        negotiationComplete = true;
+        isNegotiating = false;
+
+        if (manager != null) manager.AddNegotiation();
     }
 }

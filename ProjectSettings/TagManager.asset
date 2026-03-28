@@ -11,6 +11,8 @@ TagManager:
   - NPC
   - Phone
   - Door
+  - Negotiator
+  - Funds
   layers:
   - Default
   - TransparentFX

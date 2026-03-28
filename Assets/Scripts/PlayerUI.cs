@@ -4,24 +4,21 @@ using TMPro; // Required for TextMeshPro
 public class PlayerUI : MonoBehaviour
 {
     [Header("UI Settings")]
-    public GameObject interactUIObj;      
-    public TextMeshProUGUI interactText; 
-    public float lookRange = 4.0f;        
+    public GameObject interactUIObj;
+    public TextMeshProUGUI interactText;
+    public float lookRange = 4.0f;
 
     private PickupSystem inventory;
 
     void Start()
     {
-      
         inventory = GetComponent<PickupSystem>();
 
-        
         if (interactUIObj != null) interactUIObj.SetActive(false);
     }
 
     void Update()
     {
-        
         Collider[] hits = Physics.OverlapSphere(transform.position, lookRange);
         bool targetFound = false;
 
@@ -31,7 +28,7 @@ public class PlayerUI : MonoBehaviour
             {
                 interactText.text = "Press [E] to pick up Key";
                 targetFound = true;
-                break; 
+                break;
             }
             else if (hit.CompareTag("Rock"))
             {
@@ -41,7 +38,6 @@ public class PlayerUI : MonoBehaviour
             }
             else if (hit.CompareTag("Wall"))
             {
-        
                 if (inventory != null && inventory.hasKey)
                     interactText.text = "Press [E] to open Wall";
                 else
@@ -50,14 +46,34 @@ public class PlayerUI : MonoBehaviour
                 targetFound = true;
                 break;
             }
+            else if (hit.CompareTag("Negotiator"))
+            {
+                NegotiatorNPC npc = hit.GetComponent<NegotiatorNPC>();
+                if (npc != null)
+                {
+                    if (npc.negotiationComplete)
+                        interactText.text = "Negotiation complete.";
+                    else if (npc.isNegotiating)
+                        interactText.text = "Listening..."; // Shows while the audio plays!
+                    else
+                        interactText.text = "Press [E] to Negotiate";
+                }
+                targetFound = true;
+                break;
+            }
+            else if (hit.CompareTag("Funds"))
+            {
+                interactText.text = "Press [E] to collect European Funds";
+                targetFound = true;
+                break;
+            }
+            // ---> THE EXTRA '}' WAS RIGHT HERE. I REMOVED IT! <---
             else if (hit.CompareTag("Bridge"))
             {
-                
                 BridgeManager bridge = hit.GetComponent<BridgeManager>();
 
                 if (bridge != null)
                 {
-                  
                     if (bridge.currentRocks >= bridge.rocksNeeded)
                     {
                         interactText.text = "Press [E] to build the bridge";
@@ -91,14 +107,12 @@ public class PlayerUI : MonoBehaviour
             }
         }
 
-   
         if (interactUIObj != null)
         {
             interactUIObj.SetActive(targetFound);
         }
     }
 
-    
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
