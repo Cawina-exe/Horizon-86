@@ -10,7 +10,6 @@ public class NegotiatorNPC : MonoBehaviour
     [Header("Settings")]
     public float interactRange = 3f;
 
-    // We split this into two states now!
     public bool isNegotiating = false;
     public bool negotiationComplete = false;
 
@@ -25,7 +24,6 @@ public class NegotiatorNPC : MonoBehaviour
 
     void Update()
     {
-        // If we are currently talking, or already finished, do nothing.
         if (isNegotiating || negotiationComplete) return;
 
         if (player != null)
@@ -45,17 +43,26 @@ public class NegotiatorNPC : MonoBehaviour
 
         if (talkSound != null && talkSound.clip != null)
         {
+            // --- NEW: Audio Ducking! ---
+            // Find the Music Manager on the Player and tell it how long to stay quiet
+            MusicManager music = player.GetComponent<MusicManager>();
+            if (music != null)
+            {
+                music.DuckMusic(talkSound.clip.length);
+            }
+
+            // Play the negotiation audio
             talkSound.Play();
-            // Wait for the exact length of the audio file!
+
+            // Wait for the exact length of the audio file
             yield return new WaitForSeconds(talkSound.clip.length);
         }
         else
         {
-            // Fallback just in case you forget the audio
             yield return new WaitForSeconds(2f);
         }
 
-        // The audio is done! Now we complete it.
+        // The audio is done! Complete the negotiation.
         negotiationComplete = true;
         isNegotiating = false;
 
