@@ -13,6 +13,8 @@ TagManager:
   - Door
   - Negotiator
   - Funds
+  - Table
+  - Lamp
   layers:
   - Default
   - TransparentFX

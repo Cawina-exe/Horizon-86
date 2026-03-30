@@ -105,6 +105,35 @@ public class PlayerUI : MonoBehaviour
                 targetFound = true;
                 break;
             }
+            else if (hit.CompareTag("Lamp"))
+            {
+                interactText.text = "Press [E] to collect Lamp of Innovation";
+                targetFound = true;
+                break;
+            }
+            else if (hit.CompareTag("Table"))
+            {
+                TableManager table = hit.GetComponent<TableManager>();
+                if (table != null)
+                {
+                    if (table.isFinalActionDone)
+                    {
+                        interactText.text = "Innovation restored.";
+                    }
+                    else if (table.collectedLamps >= table.lampsNeeded)
+                    {
+                        // All 3 lamps are on the table! Ready for the final event.
+                        interactText.text = "Press [E] to activate the Table";
+                    }
+                    else
+                    {
+                        int missingLamps = table.lampsNeeded - table.collectedLamps;
+                        interactText.text = "The table needs " + missingLamps + " more lamps";
+                    }
+                }
+                targetFound = true;
+                break;
+            }
         }
 
         if (interactUIObj != null)
