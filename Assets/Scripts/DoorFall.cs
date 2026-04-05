@@ -8,7 +8,7 @@ public class DoorFall : MonoBehaviour
 
     [Header("Audio & Visuals")]
     public AudioSource crashSound;
-    public ParticleSystem dustParticles; !
+    public ParticleSystem dustParticles; 
 
     private Transform player;
     private bool isFalling = false;

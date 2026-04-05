@@ -39,7 +39,7 @@ public class NegotiatorNPC : MonoBehaviour
 
     IEnumerator NegotiationRoutine()
     {
-        isNegotiating = true; /
+        isNegotiating = true; 
 
         if (talkSound != null && talkSound.clip != null)
         {
