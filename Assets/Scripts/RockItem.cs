@@ -8,7 +8,7 @@ public class RockItem : MonoBehaviour
 
     void Start()
     {
-        // Find the player and the manager automatically
+  
         player = GameObject.FindGameObjectWithTag("Player").transform;
         bridgeManager = FindFirstObjectByType<BridgeManager>();
     }
@@ -17,7 +17,7 @@ public class RockItem : MonoBehaviour
     {
         float dist = Vector3.Distance(transform.position, player.position);
 
-        // Check if player is close AND presses E
+      
         if (dist < collectRange && Input.GetKeyDown(KeyCode.E))
         {
             Collect();

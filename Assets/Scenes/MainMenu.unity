@@ -15775,8 +15775,10 @@ MonoBehaviour:
       m_Calls: []
   m_text: "A Huge thank you to all the ETIC Algarve community.\n\nA special thanks
     to Virg\xEDnia for guiding me trough this Desafio Criativo 2026.\n\nAnd last
-    but not least a huge thanks to my mom, stepdad, boyfriend, mother in law and
-    friends, for being my home and support.\n\n"
+    but not least a huge thanks to my mom, stepdad and to my mother in law for giving
+    me strength,  to my boyfriend for all the patience, love and help,  and to my
+    friends, for being my best judges and cheerleaders.\n\nThank you, with all my
+    heart.\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -15803,8 +15805,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 30.24
+  m_fontSizeBase: 30.24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -457414,12 +457416,12 @@ GameObject:
   - component: {fileID: 1689836514}
   - component: {fileID: 1689836513}
   m_Layer: 5
-  m_Name: Acknowledgment Panel
+  m_Name: Special Notes Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1689836512
 RectTransform:
   m_ObjectHideFlags: 0
@@ -457438,8 +457440,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 1.5529785, y: -2.4437866}
+  m_SizeDelta: {x: 30.2189, y: 16.9978}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1689836513
 MonoBehaviour:
@@ -521272,7 +521274,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Acknowledgments
+  m_text: Special Notes
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1bce6fd3549d25f478fa2196c845f37d, type: 2}
   m_sharedMaterial: {fileID: 5637614395281763356, guid: 1bce6fd3549d25f478fa2196c845f37d, type: 2}
@@ -524006,7 +524008,7 @@ GameObject:
   - component: {fileID: 1930456897}
   - component: {fileID: 1930456896}
   m_Layer: 5
-  m_Name: Acknowledgment
+  m_Name: Special Notes btn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -524029,7 +524031,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -230, y: -172}
+  m_AnchoredPosition: {x: -284, y: -172}
   m_SizeDelta: {x: 299.6, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1930456896
@@ -524103,7 +524105,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: -2.67, z: -226.4, w: -6.07}
+  m_RaycastPadding: {x: 58.9, y: -2.67, z: -226.4, w: -6.07}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

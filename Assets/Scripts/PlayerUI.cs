@@ -54,7 +54,7 @@ public class PlayerUI : MonoBehaviour
                     if (npc.negotiationComplete)
                         interactText.text = "Negotiation complete.";
                     else if (npc.isNegotiating)
-                        interactText.text = "Listening..."; // Shows while the audio plays!
+                        interactText.text = "Listening..."; 
                     else
                         interactText.text = "Press [E] to Negotiate";
                 }
@@ -67,7 +67,7 @@ public class PlayerUI : MonoBehaviour
                 targetFound = true;
                 break;
             }
-            // ---> THE EXTRA '}' WAS RIGHT HERE. I REMOVED IT! <---
+           
             else if (hit.CompareTag("Bridge"))
             {
                 BridgeManager bridge = hit.GetComponent<BridgeManager>();
@@ -122,7 +122,7 @@ public class PlayerUI : MonoBehaviour
                     }
                     else if (table.collectedLamps >= table.lampsNeeded)
                     {
-                        // All 3 lamps are on the table! Ready for the final event.
+                        
                         interactText.text = "Press [E] to activate the Table";
                     }
                     else

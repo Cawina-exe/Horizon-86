@@ -39,22 +39,20 @@ public class NegotiatorNPC : MonoBehaviour
 
     IEnumerator NegotiationRoutine()
     {
-        isNegotiating = true; // Lock the interaction
+        isNegotiating = true; /
 
         if (talkSound != null && talkSound.clip != null)
         {
-            // --- NEW: Audio Ducking! ---
-            // Find the Music Manager on the Player and tell it how long to stay quiet
+         
             MusicManager music = player.GetComponent<MusicManager>();
             if (music != null)
             {
                 music.DuckMusic(talkSound.clip.length);
             }
 
-            // Play the negotiation audio
             talkSound.Play();
 
-            // Wait for the exact length of the audio file
+           
             yield return new WaitForSeconds(talkSound.clip.length);
         }
         else
@@ -62,7 +60,7 @@ public class NegotiatorNPC : MonoBehaviour
             yield return new WaitForSeconds(2f);
         }
 
-        // The audio is done! Complete the negotiation.
+        
         negotiationComplete = true;
         isNegotiating = false;
 

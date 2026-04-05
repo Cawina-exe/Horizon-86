@@ -12,7 +12,7 @@ public class DoorController : MonoBehaviour
     public float openSpeed = 2f;
 
     [Header("Audio")]
-    public AudioSource openSound; // <-- NEW: The audio slot!
+    public AudioSource openSound; 
 
     private bool isOpening = false;
     private Vector3 targetPos;
@@ -24,16 +24,16 @@ public class DoorController : MonoBehaviour
         if (player == null) player = GameObject.FindGameObjectWithTag("Player").transform;
         if (playerInventory == null) playerInventory = player.GetComponent<PickupSystem>();
 
-        // Auto-find the Audio Source if you forget to drag it in
+    
         if (openSound == null) openSound = GetComponent<AudioSource>();
     }
 
     void Update()
     {
-        // 1. Check Distance
+      
         float dist = Vector3.Distance(transform.position, player.position);
 
-        // 2. Logic: If close + Press E + Has Key + Not already open
+     
         if (dist < openRange && Input.GetKeyDown(KeyCode.E) && !isOpening)
         {
             if (playerInventory.hasKey)
@@ -41,13 +41,13 @@ public class DoorController : MonoBehaviour
                 Debug.Log("Key Used! Opening Wall.");
                 isOpening = true;
 
-                // --- NEW: Play the heavy stone sound! ---
+             
                 if (openSound != null)
                 {
                     openSound.Play();
                 }
 
-                // --- NEW: Turn off the collider so you can walk through! ---
+             
                 Collider wallCollider = GetComponent<Collider>();
                 if (wallCollider != null) wallCollider.enabled = false;
             }
@@ -57,7 +57,7 @@ public class DoorController : MonoBehaviour
             }
         }
 
-        // 3. Move the Wall
+       
         if (isOpening)
         {
             transform.position = Vector3.MoveTowards(transform.position, targetPos, openSpeed * Time.deltaTime);

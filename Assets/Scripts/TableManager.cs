@@ -9,24 +9,23 @@ public class TableManager : MonoBehaviour
     public int collectedLamps = 0;
 
     [Header("Finale Visuals (Green Energy)")]
-    [Tooltip("Put glowing lights or particle effects here to turn on at the end!")]
     public GameObject[] energyBeams;
-    [Tooltip("The big wall blocking the 2026 area")]
     public Transform blockingWall;
     public float slideDistance = 6f;
     public float slideSpeed = 2f;
 
-    [Header("Finale Era Transition (2016 -> 2026)")]
+    [Header("Finale Era Transition")]
     public Material newSkybox;
     public Color newFogColor;
-    public Light mainSun; // Drag your Directional Light here
+    public Light mainSun;
     public Color newSunColor = Color.white;
     public float newSunIntensity = 1f;
     public float fadeDuration = 3f;
 
-    [Header("Interaction Settings")]
+    [Header("Interaction & Audio")]
     public float interactRange = 4f;
-    public AudioSource successSound;
+    public AudioSource successSound;     
+    public AudioSource wallOpenSound;   
 
     private Transform player;
     public bool isFinalActionDone = false;
@@ -35,9 +34,10 @@ public class TableManager : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+
+       
         if (successSound == null) successSound = GetComponent<AudioSource>();
 
-        // Hide lamps and energy beams at the start
         foreach (GameObject lamp in displayLamps)
             if (lamp != null) lamp.SetActive(false);
 
@@ -53,20 +53,19 @@ public class TableManager : MonoBehaviour
         {
             float dist = Vector3.Distance(transform.position, player.position);
 
-            // If close + Press E + Has all 3 lamps!
             if (dist < interactRange && Input.GetKeyDown(KeyCode.E) && collectedLamps >= lampsNeeded)
             {
                 isFinalActionDone = true;
-                if (successSound != null) successSound.Play();
-                Debug.Log("Green Transition Initiated!");
 
-                // START THE CINEMATIC CUTSCENE!
+               
+                if (successSound != null) successSound.Play();
+
+                Debug.Log("Green Transition Initiated!");
                 StartCoroutine(FinaleSequence());
             }
         }
     }
 
-    // Called instantly when you press E on a world lamp
     public void AddLamp()
     {
         if (collectedLamps < displayLamps.Length && displayLamps[collectedLamps] != null)
@@ -77,13 +76,12 @@ public class TableManager : MonoBehaviour
 
     IEnumerator FinaleSequence()
     {
-        // 1. Turn on the Green Energy Beams!
         foreach (GameObject beam in energyBeams)
         {
             if (beam != null) beam.SetActive(true);
         }
 
-        // 2. FADE TO BLACK
+        
         oldSkybox = RenderSettings.skybox;
         float startExposure = oldSkybox.HasProperty("_Exposure") ? oldSkybox.GetFloat("_Exposure") : 1f;
         float startSunIntensity = mainSun != null ? mainSun.intensity : 1f;
@@ -100,7 +98,7 @@ public class TableManager : MonoBehaviour
             yield return null;
         }
 
-        // 3. SWAP THE ERA (in the dark)
+       
         float currentRotation = oldSkybox.HasProperty("_Rotation") ? oldSkybox.GetFloat("_Rotation") : 0f;
         if (newSkybox.HasProperty("_Rotation")) newSkybox.SetFloat("_Rotation", currentRotation);
         if (newSkybox.HasProperty("_Exposure")) newSkybox.SetFloat("_Exposure", 0f);
@@ -109,10 +107,12 @@ public class TableManager : MonoBehaviour
         RenderSettings.fogColor = newFogColor;
         if (mainSun != null) mainSun.color = newSunColor;
 
-        // Secretly fix the old skybox
         if (oldSkybox.HasProperty("_Exposure")) oldSkybox.SetFloat("_Exposure", 1f);
 
-        // 4. FADE BACK UP AND SLIDE THE WALL DOWN
+        
+        if (wallOpenSound != null) wallOpenSound.Play();
+
+       
         timer = 0f;
         Vector3 wallTarget = blockingWall != null ? blockingWall.position + Vector3.down * slideDistance : Vector3.zero;
 
@@ -120,24 +120,20 @@ public class TableManager : MonoBehaviour
         {
             timer += Time.deltaTime;
 
-            // Brighten sky
             if (newSkybox.HasProperty("_Exposure"))
                 newSkybox.SetFloat("_Exposure", Mathf.Lerp(0f, 1f, timer / halfTime));
             if (mainSun != null)
                 mainSun.intensity = Mathf.Lerp(0f, newSunIntensity, timer / halfTime);
 
-            // Slide wall
             if (blockingWall != null)
                 blockingWall.position = Vector3.MoveTowards(blockingWall.position, wallTarget, slideSpeed * Time.deltaTime);
 
             yield return null;
         }
 
-        // 5. SAFETY LOCKS
         if (newSkybox.HasProperty("_Exposure")) newSkybox.SetFloat("_Exposure", 1f);
         if (mainSun != null) mainSun.intensity = newSunIntensity;
 
-        // Finish sliding the wall if it's slow
         if (blockingWall != null)
         {
             while (Vector3.Distance(blockingWall.position, wallTarget) > 0.01f)
@@ -148,7 +144,6 @@ public class TableManager : MonoBehaviour
         }
     }
 
-    // Safety fix for Unity Editor stopping
     void OnApplicationQuit()
     {
         if (RenderSettings.skybox != null && RenderSettings.skybox.HasProperty("_Exposure"))

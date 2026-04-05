@@ -31,17 +31,17 @@ public class NPCInteract : MonoBehaviour
 
     void Talk()
     {
-        // Only play the audio if it is NOT already playing
+   
         if (voiceAudio != null && !voiceAudio.isPlaying)
         {
             voiceAudio.Play();
             Debug.Log(gameObject.name + " says: Hello there!");
 
-            // --- NEW: Tell the music to duck! ---
+          
             MusicManager music = player.GetComponent<MusicManager>();
             if (music != null && voiceAudio.clip != null)
             {
-                // Send the exact length of the audio clip to the Music Manager
+              
                 music.DuckMusic(voiceAudio.clip.length);
             }
         }

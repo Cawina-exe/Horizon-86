@@ -9,7 +9,7 @@ public class PickupSystem : MonoBehaviour
     public Animator playerAnimator;
 
     [Header("Inventory")]
-    public bool hasKey = false; // This stores if we have the key!
+    public bool hasKey = false; 
 
     private bool isPickingUp = false;
 
@@ -17,7 +17,6 @@ public class PickupSystem : MonoBehaviour
     {
         if (isPickingUp) return;
 
-        // Press E to interact
         if (Input.GetKeyDown(KeyCode.E))
         {
             TryPickup();
@@ -30,7 +29,6 @@ public class PickupSystem : MonoBehaviour
 
         foreach (var hit in hitColliders)
         {
-            // Check if it is the Key
             if (hit.gameObject.name.Contains("Key") || hit.gameObject.tag == "Key")
             {
                 StartCoroutine(PickupSequence(hit.gameObject));
@@ -43,18 +41,18 @@ public class PickupSystem : MonoBehaviour
     {
         isPickingUp = true;
 
-        // 1. Play Animation
+      
         if (playerAnimator != null) playerAnimator.SetTrigger("trigPickup");
 
-        // 2. Wait for hand to go down (adjust this time to match your animation)
+      
         yield return new WaitForSeconds(0.5f);
 
-        // 3. "Store" the item
-        hasKey = true;          // Remember we have it
-        Destroy(item);          // Delete the object from the world (Hides it)
+       
+        hasKey = true;          
+        Destroy(item);         
         Debug.Log("Key Picked Up! Go find the wall.");
 
-        // 4. Wait for animation to finish
+      
         yield return new WaitForSeconds(0.5f);
         isPickingUp = false;
     }

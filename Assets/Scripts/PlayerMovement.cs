@@ -26,28 +26,28 @@ public class PlayerMovement : MonoBehaviour
         bool isMoving = direction.magnitude > 0.1f;
         bool isSprinting = Input.GetKey(KeyCode.LeftShift);
 
-        // --- ANIMATION LOGIC ---
+     
         if (animator != null)
         {
-            // If we are moving and NOT holding shift -> Walking
+          
             animator.SetBool("IsWalking", isMoving && !isSprinting);
 
-            // If we are moving AND holding shift -> Running
+        
             animator.SetBool("IsRunning", isMoving && isSprinting);
         }
 
-        // --- MOVEMENT ---
+       
         float currentSpeed = isSprinting ? runSpeed : walkSpeed;
         rb.linearVelocity = new Vector3(direction.x * currentSpeed, rb.linearVelocity.y, direction.z * currentSpeed);
 
-        // --- ROTATION ---
+     
         if (isMoving)
         {
             Quaternion toRotation = Quaternion.LookRotation(direction, Vector3.up);
             transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, 10f * Time.deltaTime);
         }
 
-        // --- JUMP ---
+      
         isGrounded = Physics.CheckSphere(feetPoint.position, 0.2f, groundLayer);
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {

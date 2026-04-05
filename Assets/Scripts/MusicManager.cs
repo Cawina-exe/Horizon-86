@@ -16,7 +16,7 @@ public class MusicManager : MonoBehaviour
     void Start()
     {
         musicSource = GetComponent<AudioSource>();
-        maxVolume = musicSource.volume; // Remembers your default volume setting
+        maxVolume = musicSource.volume; 
     }
 
     public void ChangeMusic(AudioClip newClip)
@@ -24,7 +24,7 @@ public class MusicManager : MonoBehaviour
         if (musicSource.clip == newClip) return;
 
         if (currentFade != null) StopCoroutine(currentFade);
-        if (duckCoroutine != null) StopCoroutine(duckCoroutine); // Stop ducking if we change zones
+        if (duckCoroutine != null) StopCoroutine(duckCoroutine); 
 
         currentFade = StartCoroutine(FadeRoutine(newClip));
     }
@@ -51,7 +51,6 @@ public class MusicManager : MonoBehaviour
         musicSource.volume = maxVolume;
     }
 
-    // --- NEW DUCKING SYSTEM ---
     public void DuckMusic(float duration)
     {
         if (duckCoroutine != null) StopCoroutine(duckCoroutine);
@@ -63,7 +62,7 @@ public class MusicManager : MonoBehaviour
         float startVol = musicSource.volume;
         float timer = 0f;
 
-        // 1. Fade down quickly (0.5 seconds)
+      
         while (timer < 0.5f)
         {
             timer += Time.deltaTime;
@@ -72,10 +71,9 @@ public class MusicManager : MonoBehaviour
         }
         musicSource.volume = duckVolume;
 
-        // 2. Wait for the audio clip to finish playing
+    
         yield return new WaitForSeconds(duration);
 
-        // 3. Fade back up smoothly (1 second)
         timer = 0f;
         while (timer < 1f)
         {
