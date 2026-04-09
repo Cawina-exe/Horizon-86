@@ -16,9 +16,9 @@ In **Horizon-86**, players control a young explorer in a retro-futuristic settin
 Each phase of the game represents a decade or a major milestone:
 * **1986:** The start of the journey, focused on breaking down walls and opening borders.
 * **1996:** Structural reconstruction, symbolized by repairing bridges through resource collection.
-* **2006:** Digital Inovation and Economical crisis in Portugal (Ongoing).
-* **2016:** The phase of digital innovation and expansion(Ongoing).
-* **2026:** The present and the future(Ongoing).
+* **2006:** Digital Inovation and Economical crisis in Portugal.
+* **2016:** The phase of digital innovation and expansion.
+* **2026:** The present and the future.
 
 
 ## Key Features
